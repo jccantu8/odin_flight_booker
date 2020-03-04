@@ -1,0 +1,23 @@
+<%= form_with(url: "/", method: "get") do %>
+    <%= label_tag(:from_airport_id, "From") %>
+    <%= select(:search, :from_airport_id, @airports) %>
+
+    <%= label_tag(:to_airport_id, "To") %>
+    <%= select(:search, :to_airport_id, @airports) %>
+
+    <%= label_tag(:number_of_passengers, "Number of Passengers") %>
+    <%= select(:search, :number_of_passengers, @number_of_passengers) %>
+
+    <%= label_tag(:flight_date, "Date of flight") %>
+    <%= select(:search, :flight_date, @flight_date) %>
+
+    <%= submit_tag "Submit" %>
+<% end %>
+
+<% if @eligible_flights %>
+
+    <% @eligible_flights.each do |flight| %>
+        <%= flight %>
+    <% end %>
+
+<% end %>
