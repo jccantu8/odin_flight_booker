@@ -1,23 +1,17 @@
-<%= form_with(url: "/", method: "get") do %>
-    <%= label_tag(:from_airport_id, "From") %>
-    <%= select(:search, :from_airport_id, @airports) %>
-
-    <%= label_tag(:to_airport_id, "To") %>
-    <%= select(:search, :to_airport_id, @airports) %>
-
-    <%= label_tag(:number_of_passengers, "Number of Passengers") %>
-    <%= select(:search, :number_of_passengers, @number_of_passengers) %>
-
-    <%= label_tag(:flight_date, "Date of flight") %>
-    <%= select(:search, :flight_date, @flight_date) %>
-
-    <%= submit_tag "Submit" %>
-<% end %>
+<%= render 'search' %>
 
 <% if @eligible_flights %>
 
-    <% @eligible_flights.each do |flight| %>
-        <%= flight %>
+    <%= form_with(url: "/bookings/new", method: "get", local: true) do %>
+        <div>
+            <% @eligible_flights.each do |flight| %>
+                <%= radio_button_tag(:chosen_flight, flight.id) %>
+                <%= label_tag(:chosen_flight_id, "Flight #{flight.id}") %>
+            <% end %>
+
+            <%= hidden_field_tag(:number_of_passengers, @chosen_number_of_passengers) %>
+            <%= submit_tag "Submit Flight" %>
+        </div>
     <% end %>
 
 <% end %>

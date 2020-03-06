@@ -27,7 +27,7 @@ end
     outgoing = AIRPORTS_IDS.key(outgoing_airport_id)
     incoming = AIRPORTS_IDS.key(incoming_airport_id)
     duration = DURATIONS[outgoing][incoming]
-    start = DateTime.now - (rand * 28)
+    start = (Date.today - (rand * 28))
 
     Flight.create( from_airport_id: incoming_airport_id, to_airport_id: outgoing_airport_id, start:start, duration: duration)
 end

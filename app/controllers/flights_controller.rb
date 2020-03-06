@@ -6,6 +6,7 @@ class FlightsController < ApplicationController
 
         if params[:search]
             @eligible_flights = Flight.filter(search_params)
+            @chosen_number_of_passengers = search_params[:number_of_passengers]
         end
     end
 
