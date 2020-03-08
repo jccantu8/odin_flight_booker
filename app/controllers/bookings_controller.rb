@@ -11,6 +11,7 @@ class BookingsController < ApplicationController
         @booking = Booking.new(booking_params)
 
         if @booking.save
+            PassengerMailer.with(passengers: @booking.passengers.pluck(:id)).booking_success_email.deliver_later
             render 'show'
         else
             render 'new'
